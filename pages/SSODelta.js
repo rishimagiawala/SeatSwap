@@ -1,19 +1,30 @@
 import * as React from 'react';
 import { StyleSheet, Text, View , Image} from 'react-native';
-import { useTheme, Button, Appbar, } from 'react-native-paper';
+import { useTheme, Button, Appbar, TextInput} from 'react-native-paper';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 const SSODelta = (props) =>{ 
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("")
     const theme = useTheme();
     return (
     <PaperProvider theme = {theme}>
     <SafeAreaProvider>
-    <Appbar.Header>
-    <Appbar.BackAction onPress={() => {}} />
-    <Appbar.Content title="Title" />
-    <Appbar.Action icon="calendar" onPress={() => {}} />
-    <Appbar.Action icon="magnify" onPress={() => {}} />
-  </Appbar.Header>
+    <TextInput 
+     label="Email"
+     value={email}
+     onChangeText={email => setEmail(email)}
+    />
+    <TextInput
+      label="Password"
+      value={password}
+      onChangeText={password => setPassword(password)}
+    />
+     <Button icon="camera" mode="contained" onPress={function(){
+        console.log("Email: " + email + "| Password: " + password)
+     }}>
+    Press me
+  </Button>
     
     </SafeAreaProvider>
 </PaperProvider>
