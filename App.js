@@ -1,10 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , Image} from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+
 
 export default function App() {
+  const theme = useTheme();
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <View style={{backgroundColor: theme.colors.primary}}>
+      <Text>hello world</Text>
       <StatusBar style="auto" />
     </View>
   );
