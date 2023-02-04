@@ -1,17 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , Image} from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme, Button, Appbar, } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 
-
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import TitleAppbar from './components/TitleAppbar'
+import AirlineDropDown from './components/AirlineDropdown';
 
 export default function App() {
   const theme = useTheme();
   
   return (
+    <PaperProvider>
+    <SafeAreaProvider>
+      
     <View style={{backgroundColor: theme.colors.primary}}>
-      <Text>hello world</Text>
-      <StatusBar style="auto" />
+      <TitleAppbar title = "Welcome to My App" yogith="Hello" />
+      <AirlineDropDown select= "Select a Gender" />
     </View>
+    </SafeAreaProvider>
+    </PaperProvider>
   );
 }
 
