@@ -18,11 +18,11 @@ export default function App() {
    <NavigationContainer>
     
       <Stack.Navigator>
-      {/* <Stack.Screen
+      <Stack.Screen
           name="SSODelta"
           component={SSODelta}
           options={{title: 'Sign In to Delta'}}
-        /> */}
+        />
       <Stack.Screen
           name="Home"
           component={Home}
