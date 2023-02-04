@@ -9,6 +9,7 @@ import TitleAppbar from './components/TitleAppbar'
 import AirlineDropDown from './components/AirlineDropdown';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SSODelta from './pages/SSODelta';
+import Home from './pages/Home';
 const Stack = createNativeStackNavigator()
 export default function App() {
   const theme = useTheme();
@@ -17,11 +18,17 @@ export default function App() {
    <NavigationContainer>
     
       <Stack.Navigator>
-        <Stack.Screen
+      {/* <Stack.Screen
           name="SSODelta"
           component={SSODelta}
           options={{title: 'Sign In to Delta'}}
+        /> */}
+      <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: 'Welcome Home'}}
         />
+        
        
         
         

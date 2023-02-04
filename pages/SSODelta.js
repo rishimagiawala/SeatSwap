@@ -8,7 +8,12 @@ const SSODelta = (props) =>{
     return (
     <PaperProvider theme = {theme}>
     <SafeAreaProvider>
-    <Text>PLease Me</Text>
+    <Appbar.Header>
+    <Appbar.BackAction onPress={() => {}} />
+    <Appbar.Content title="Title" />
+    <Appbar.Action icon="calendar" onPress={() => {}} />
+    <Appbar.Action icon="magnify" onPress={() => {}} />
+  </Appbar.Header>
     
     </SafeAreaProvider>
 </PaperProvider>

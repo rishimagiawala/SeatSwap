@@ -1,9 +1,14 @@
 import * as React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View , Image} from 'react-native';
+import { useTheme, Button, Appbar, } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SelectList} from 'react-native-dropdown-select-list'
 
-const App = () => {
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+const Dropdown = () => {
     const [selected, setSelected] = React.useState("");
     const data = [
         {key:'1', value:'Delta ', disabled:true},
@@ -13,16 +18,19 @@ const App = () => {
     ]
 }
 
-const HomeScreen = ({navigation}) => {
+const Home = ({navigation}) => {
+theme= useTheme();
     return (
-      <Button
-        title="Go to Jane's profile"
-        onPress={() =>
-          navigation.navigate('Profile', {name: 'Jane'})
-        }
-      />
+      <PaperProvider theme = {theme}>
+        <SafeAreaProvider>
+        <Appbar.Header>
+    <Appbar.BackAction onPress={() => {}} />
+    <Appbar.Content title="TitlFFe" />
+    <Appbar.Action icon="calendar" onPress={() => {}} />
+    <Appbar.Action icon="magnify" onPress={() => {}} />
+  </Appbar.Header>
+      </SafeAreaProvider>
+      </PaperProvider>
     );
   };
-  const ProfileScreen = ({navigation, route}) => {
-    return <Text>This is {route.params.name}'s profile</Text>;
-  };
+  export default Home;
