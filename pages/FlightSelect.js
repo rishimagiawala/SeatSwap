@@ -1,17 +1,19 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { useTheme, Button, Appbar, TextInput } from 'react-native-paper';
-import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, } from 'react-native-paper';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { useTheme, Button, Appbar, TextInput, Card } from 'react-native-paper';
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme} from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {delta} from '../assets/deltaLogo.png'
 // import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 
 import { initializeApp } from 'firebase/app';
 // import { getAuth } from "firebase/auth";
 
 // Optionally import the services that you want to use
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// import {...} from "firebase/database";
+import { getDatabase, ref, onValue, set, get, child, update } from "firebase/database";
+
 // import {...} from "firebase/firestore";
 // import {...} from "firebase/functions";
 // import {...} from "firebase/storage";
@@ -35,10 +37,20 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 // const auth = getAuth(app);
 const auth = getAuth(app);
+const userDB = getDatabase(app);
+// const dbRef = ref(getDatabase(app));
+//       get(child(dbRef, './'))
+//         .then((snapshot) => {
+         
+//           console.log(snapshot)
+//         })
+//         .catch((error) => {
+//           console.error(error);
+//         });
 
 
 
-const SSODelta = (props) => {
+const FlightSelect = (props) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("")
   
@@ -91,47 +103,39 @@ const SSODelta = (props) => {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
-        <View style={styles.container}>
-        <Image
-        style={styles.tinyLogo}
-        source={require('../assets/deltaLogo.png')}
-      />
-
-        <TextInput
-        mode='outlined'
-        style={styles.inputField}
-          label="Email"
-          value={email}
-          onChangeText={email => setEmail(email)}
-        />
-        <TextInput
-        mode='outlined'
-        style={styles.inputField}
-          label="Password"
-          value={password}
-          onChangeText={password => setPassword(password)}
-        />
-        <Button style={styles.loginButton} icon="login" mode="contained" onPress={function () {
-          // console.log("Email: " + email + "| Password: " + password)
-          signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-              console.log(userCredential.user.email);
-             
-              props.navigation.navigate('FlightSelect', {
-                email: userCredential.user.email
-              })
-              // ...
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              console.log("Invalid Login");
-            });
-
-        }}>
-          Login to Delta
-        </Button>
-        </View>
+       <ScrollView>
+      <Card style={styles.flightCard}>
+    <Card.Title title="Atlanta to JFK" subtitle="Seat: A1-Economy" />
+   
+    <Card.Cover source={{ uri: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2021/09/1200/675/statue-of-liberty-1.jpg?ve=1&tl=1' }} />
+    <Card.Actions>
+    <Button onPress={() => {
+        props.navigation.navigate('SeatMap')
+      }}>Ok</Button>
+    </Card.Actions>
+  </Card>
+  <Card style={styles.flightCard}>
+    <Card.Title title="New York to London" subtitle="Seat: G6-First Class" />
+   
+    <Card.Cover source={{ uri: 'https://cdn.londonandpartners.com/-/media/images/london/visit/traveller-information/essential-information/when-do-the-clocks-change/big-ben-clock-change-640x360.jpg?mw=640&hash=D0BD1035355493F83B2CB54A35FAB11C64EF87DF' }} />
+    <Card.Actions>
+    <Button onPress={() => {
+        props.navigation.navigate('SeatMap')
+      }}>Ok</Button>
+    </Card.Actions>
+  </Card>
+  <Card style={styles.flightCard}>
+    <Card.Title title="Atlanta to JFK" subtitle= {props.route.params.email}  />
+   
+    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+    <Card.Actions>
+      <Button onPress={() => {
+        props.navigation.navigate('SeatMap')
+      }}>Ok</Button>
+    </Card.Actions>
+  </Card>
+        
+  </ScrollView>
       </SafeAreaProvider>
     </PaperProvider>
   );
@@ -161,7 +165,11 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
   },
+  flightCard: {
+    marginVertical: 10,
+    marginHorizontal: 3
+  }
 
 });
 
-export default SSODelta;
+export default FlightSelect;

@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , Image} from 'react-native';
 import { useTheme, Button, Appbar, } from 'react-native-paper';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, } from 'react-native-paper';
 import {NavigationContainer} from '@react-navigation/native';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -10,24 +10,35 @@ import AirlineDropDown from './components/AirlineDropdown';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SSODelta from './pages/SSODelta';
 import Home from './pages/Home';
+import SeatMap from './pages/SeatMap';
+import FlightSelect from './pages/FlightSelect';
 const Stack = createNativeStackNavigator()
+
 export default function App() {
-  const theme = useTheme();
+ 
+
   
   return (
+    
    <NavigationContainer>
     
       <Stack.Navigator>
       <Stack.Screen
           name="SSODelta"
           component={SSODelta}
-          options={{title: 'Sign In to Delta'}}
+          options={{title: 'Sign In to Delta SSO'}}
         />
-      <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{title: 'Welcome Home'}}
+        <Stack.Screen
+          name="FlightSelect"
+          component={FlightSelect}
+          options={{title: 'Please Select Your Flights'}}
         />
+         <Stack.Screen
+          name="SeatMap"
+          component={SeatMap}
+          options={{title: 'Request to Seat Swap'}}
+        />
+
         
        
         
@@ -36,6 +47,7 @@ export default function App() {
     
     
     </NavigationContainer>
+    
     
   );
 }
@@ -48,3 +60,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+

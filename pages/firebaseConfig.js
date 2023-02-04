@@ -1,9 +1,9 @@
 firebaseConfig.js
 import { initializeApp } from 'firebase/app';
-import { getAuth } from "firebase/auth";
+// import { getAuth } from "firebase/auth";
 
 // Optionally import the services that you want to use
-// import {...} from "firebase/auth";
+ import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 // import {...} from "firebase/database";
 // import {...} from "firebase/firestore";
 // import {...} from "firebase/functions";
@@ -26,4 +26,5 @@ const app = initializeApp(firebaseConfig);
 // see the Firebase documentation: https://firebase.google.com/docs/web/setup#access-firebase
 
 // Initialize Firebase Authentication and get a reference to the service
+// const auth = getAuth(app);
 const auth = getAuth(app);

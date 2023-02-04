@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { useTheme, Button, Appbar, TextInput } from 'react-native-paper';
-import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, } from 'react-native-paper';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { useTheme, Button, Appbar, TextInput, Card, Surface } from 'react-native-paper';
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, FAB} from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {delta} from '../assets/deltaLogo.png'
+import SeatRow from '../components/SeatRow';
+import { Foundation } from '@expo/vector-icons'; 
 // import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 
 import { initializeApp } from 'firebase/app';
 // import { getAuth } from "firebase/auth";
@@ -38,9 +41,7 @@ const auth = getAuth(app);
 
 
 
-const SSODelta = (props) => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("")
+const SeatMap = (props) => {
   
   const theme = {
     ...DefaultTheme,
@@ -91,47 +92,22 @@ const SSODelta = (props) => {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
-        <View style={styles.container}>
-        <Image
-        style={styles.tinyLogo}
-        source={require('../assets/deltaLogo.png')}
-      />
+        
+     <SeatRow rowNumber = '1'/>
+     <SeatRow rowNumber = '2'/>
+     <SeatRow rowNumber = '3'/>
+     <SeatRow rowNumber = '4'/>
+     <View style={{flexDirection: 'row', gap: 4, justifyContent: 'space-around',}}>
+     <Surface style={styles.surface} elevation={4}>
+     <Foundation name="male-female" size={40} color="black" />
+  </Surface>
+  <Surface style={styles.surface} elevation={4}>
+  <Foundation name="male-female" size={40} color="black" />
 
-        <TextInput
-        mode='outlined'
-        style={styles.inputField}
-          label="Email"
-          value={email}
-          onChangeText={email => setEmail(email)}
-        />
-        <TextInput
-        mode='outlined'
-        style={styles.inputField}
-          label="Password"
-          value={password}
-          onChangeText={password => setPassword(password)}
-        />
-        <Button style={styles.loginButton} icon="login" mode="contained" onPress={function () {
-          // console.log("Email: " + email + "| Password: " + password)
-          signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-              console.log(userCredential.user.email);
-             
-              props.navigation.navigate('FlightSelect', {
-                email: userCredential.user.email
-              })
-              // ...
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              console.log("Invalid Login");
-            });
+  </Surface>
 
-        }}>
-          Login to Delta
-        </Button>
-        </View>
+
+     </View>
       </SafeAreaProvider>
     </PaperProvider>
   );
@@ -161,7 +137,25 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
   },
+  flightCard: {
+    marginVertical: 10,
+    marginHorizontal: 3
+  },
+  cabinColumn: {
+    
+  },
+  surface: {
+    padding: 8,
+    height: 80,
+    width: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 70,
+  },
+  
+  
+  
 
 });
 
-export default SSODelta;
+export default SeatMap;
