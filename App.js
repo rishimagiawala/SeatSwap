@@ -9,7 +9,7 @@ export default function App() {
   
   return (
     <View style={{backgroundColor: theme.colors.primary}}>
-      <Text>hello world</Text>
+      
       <StatusBar style="auto" />
     </View>
   );
