@@ -8,7 +8,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import TitleAppbar from './components/TitleAppbar'
 import AirlineDropDown from './components/AirlineDropdown';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import SSODelta from './pages/SSODelta';
 const Stack = createNativeStackNavigator()
 export default function App() {
   const theme = useTheme();
