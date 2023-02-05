@@ -42,7 +42,16 @@ const auth = getAuth(app);
 
 
 const SeatMap = (props) => {
-  
+    React.useEffect(() => {
+    
+
+
+        // Update the document title using the browser API
+       console.log(props.route.params.seats[0]);
+    
+      });
+
+
   const theme = {
     ...DefaultTheme,
     colors: {
@@ -93,10 +102,10 @@ const SeatMap = (props) => {
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
         
-     <SeatRow rowNumber = '1'/>
-     <SeatRow rowNumber = '2'/>
-     <SeatRow rowNumber = '3'/>
-     <SeatRow rowNumber = '4'/>
+     <SeatRow userEmail= {props.route.params.userEmail} a={props.route.params.seats[0]} b= {props.route.params.seats[1]} c= {props.route.params.seats[2]} d = {props.route.params.seats[3]} rowNumber = '1'/>
+     <SeatRow userEmail= {props.route.params.userEmail} a={props.route.params.seats[4]} b= {props.route.params.seats[5]} c= {props.route.params.seats[6]} d = {props.route.params.seats[7]} rowNumber = '2'/>
+     <SeatRow userEmail= {props.route.params.userEmail} a={props.route.params.seats[8]} b= {props.route.params.seats[9]} c= {props.route.params.seats[10]} d = {props.route.params.seats[11]} rowNumber = '3'/>
+     <SeatRow userEmail= {props.route.params.userEmail} a={props.route.params.seats[12]} b= {props.route.params.seats[13]} c= {props.route.params.seats[14]} d = {props.route.params.seats[15]} rowNumber = '4'/>
      <View style={{flexDirection: 'row', gap: 4, justifyContent: 'space-around',}}>
      <Surface style={styles.surface} elevation={4}>
      <Foundation name="male-female" size={40} color="black" />

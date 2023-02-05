@@ -38,22 +38,19 @@ const app = initializeApp(firebaseConfig);
 // const auth = getAuth(app);
 const auth = getAuth(app);
 const userDB = getDatabase(app);
-// const dbRef = ref(getDatabase(app));
-//       get(child(dbRef, './'))
-//         .then((snapshot) => {
-         
-//           console.log(snapshot)
-//         })
-//         .catch((error) => {
-//           console.error(error);
-//         });
-
-
 
 const FlightSelect = (props) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("")
-  
+
+  React.useEffect(() => {
+    
+
+
+    // Update the document title using the browser API
+   console.log("Effect Was Called");
+
+  });
   const theme = {
     ...DefaultTheme,
     colors: {
@@ -104,33 +101,17 @@ const FlightSelect = (props) => {
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
        <ScrollView>
-      <Card style={styles.flightCard}>
-    <Card.Title title="Atlanta to JFK" subtitle="Seat: A1-Economy" />
-   
-    <Card.Cover source={{ uri: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2021/09/1200/675/statue-of-liberty-1.jpg?ve=1&tl=1' }} />
-    <Card.Actions>
-    <Button onPress={() => {
-        props.navigation.navigate('SeatMap')
-      }}>Ok</Button>
-    </Card.Actions>
-  </Card>
-  <Card style={styles.flightCard}>
-    <Card.Title title="New York to London" subtitle="Seat: G6-First Class" />
-   
-    <Card.Cover source={{ uri: 'https://cdn.londonandpartners.com/-/media/images/london/visit/traveller-information/essential-information/when-do-the-clocks-change/big-ben-clock-change-640x360.jpg?mw=640&hash=D0BD1035355493F83B2CB54A35FAB11C64EF87DF' }} />
-    <Card.Actions>
-    <Button onPress={() => {
-        props.navigation.navigate('SeatMap')
-      }}>Ok</Button>
-    </Card.Actions>
-  </Card>
+     
   <Card style={styles.flightCard}>
     <Card.Title title="Atlanta to JFK" subtitle= {props.route.params.email}  />
    
     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
     <Card.Actions>
-      <Button onPress={() => {
-        props.navigation.navigate('SeatMap')
+    <Button onPress={() => {
+       props.navigation.navigate('SeatMap', {
+        seats: props.route.params.seats,
+        userEmail: props.route.params.email
+       })
       }}>Ok</Button>
     </Card.Actions>
   </Card>
