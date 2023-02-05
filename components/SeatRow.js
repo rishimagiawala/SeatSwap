@@ -43,10 +43,10 @@ const auth = getAuth(app);
 
 const SeatRow = (props) => {
     const [email, setEmail] = React.useState(props.userEmail);
-    const [a, setA] = React.useState(props.a.email)
-    const [b, setB] = React.useState(props.b.email)
-    const [c, setC] = React.useState(props.c.email)
-    const [d, setD] = React.useState(props.d.email)
+    const [a, setA] = React.useState(props.a)
+    const [b, setB] = React.useState(props.b)
+    const [c, setC] = React.useState(props.c)
+    const [d, setD] = React.useState(props.d)
     // React.useEffect(() => {
     
     //     console.log(props.userEmail)
@@ -107,25 +107,25 @@ const SeatRow = (props) => {
       <View style={styles.rowContainer}>
       <FAB 
     icon="alpha-a-box-outline"
-    
-    style={props.userEmail = props.a ? {padding: 10} : {}}
+   
+    style= {email === a.email ? {backgroundColor: 'gray'} : a.taken === true ? {backgroundColor: '#eda955'} : {backgroundColor: 'green'} }
     onPress={() => console.log(props.a)}
   />
   <FAB
     icon="alpha-b-box-outline"
-     
+    style= {email === b.email ? {backgroundColor: 'gray'} : b.taken === true ? {backgroundColor: '#eda955'} : {backgroundColor: 'green'} }
      onPress={() => console.log(props.b)}
   />
   <Text style={{fontSize: 30, top:10}}>{props.rowNumber}</Text>
   <FAB
     icon="alpha-c-box-outline"
    
-     
+    style= {email === c.email ? {backgroundColor: 'gray'} : c.taken === true ? {backgroundColor: '#eda955'} : {backgroundColor: 'green'} }
      onPress={() => console.log(props.c)}
   />
   <FAB
     icon="alpha-d-box-outline"
-     
+    style= {email === d.email ? {backgroundColor: 'gray'} : d.taken === true ? {backgroundColor: '#eda955'} : {backgroundColor: 'green'} }
      onPress={() => console.log(props.d)}
   />
   </View>
