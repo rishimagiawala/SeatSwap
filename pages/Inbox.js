@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { useTheme, Button, Appbar, TextInput, Card, Surface } from 'react-native-paper';
-import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, FAB, Portal, Dialog} from 'react-native-paper';
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, FAB, Portal, Dialog, IconButton, MD3Colors} from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {delta} from '../assets/deltaLogo.png'
 import SeatRow from '../components/SeatRow';
@@ -41,20 +41,8 @@ const auth = getAuth(app);
 
 
 
-const SeatMap = (props) => {
-    const [visible, setVisible] = React.useState(false);
-
-    const showDialog = () => setVisible(true);
-    const [chosenSeat, setChosenSeat] = React.useState();
-    const [currentSeat, setCurrentSeat] = React.useState();
-    const hideDialog = () => setVisible(false);
-    const sendRequest = (requestedSeat) => {
-        setChosenSeat(requestedSeat);
-        
-        showDialog();
-    }
+const Inbox = (props) => {
     
-     
 
 
   const theme = {
@@ -107,42 +95,58 @@ const SeatMap = (props) => {
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
       
-      <Portal>
-          <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.Title>Are You Sure You Want to Change Your Seat?</Dialog.Title>
-            <Dialog.Content>
-              <Text variant="bodyMedium">Requested Seat Is: {chosenSeat}</Text>
-              <Text variant="bodyMedium">Current Seat Is: {currentSeat}</Text>
-            </Dialog.Content>
-            <Dialog.Actions>
-              <Button onPress={hideDialog}>Yes</Button>
-              <Button onPress={hideDialog}>No</Button>
-            </Dialog.Actions>
-          </Dialog>
-        </Portal>
-     <SeatRow setCurrentSeat={setCurrentSeat} sendRequest={sendRequest} userEmail= {props.route.params.userEmail} a={props.route.params.seats[0]} b= {props.route.params.seats[1]} c= {props.route.params.seats[2]} d = {props.route.params.seats[3]} rowNumber = '1'/>
-     <SeatRow setCurrentSeat={setCurrentSeat} sendRequest={sendRequest} userEmail= {props.route.params.userEmail} a={props.route.params.seats[4]} b= {props.route.params.seats[5]} c= {props.route.params.seats[6]} d = {props.route.params.seats[7]} rowNumber = '2'/>
-     <SeatRow setCurrentSeat={setCurrentSeat} sendRequest={sendRequest} userEmail= {props.route.params.userEmail} a={props.route.params.seats[8]} b= {props.route.params.seats[9]} c= {props.route.params.seats[10]} d = {props.route.params.seats[11]} rowNumber = '3'/>
-     <SeatRow setCurrentSeat={setCurrentSeat} sendRequest={sendRequest} userEmail= {props.route.params.userEmail} a={props.route.params.seats[12]} b= {props.route.params.seats[13]} c= {props.route.params.seats[14]} d = {props.route.params.seats[15]} rowNumber = '4'/>
-     <View style={{flexDirection: 'row', gap: 4, justifyContent: 'space-around',}}>
-     <Surface style={styles.surface} elevation={4}>
-     <Foundation name="male-female" size={40} color="black" />
+    <View>
+    <Surface style={styles.surface} elevation={4}>
+     <Text size={50}>Requesting to chaou</Text>
+     <IconButton
+    icon="check"
+    iconColor={'green'}
+    size={20}
+    style={styles.surfaceButton}
+    onPress={() => console.log('Pressed')}
+  />
+  <IconButton
+    icon="cancel"
+    iconColor={MD3Colors.error50}
+    size={20}
+    style={styles.surfaceButton}
+    onPress={() => console.log('Pressed')}
+  />
   </Surface>
   <Surface style={styles.surface} elevation={4}>
-  <Foundation name="male-female" size={40} color="black" />
-
-  </Surface>
-  <FAB
-    icon="email-alert-outline"
-    
-    style={styles.fab}
-    onPress={() => {props.navigation.navigate('Inbox', {
-        seats: props.route.params.seats,
-        userEmail: props.route.params.email
-       })
-      }}
+     <Text size={50}>Requesting to chaou</Text>
+     <IconButton
+    icon="check"
+    iconColor={'green'}
+    size={20}
+    style={styles.surfaceButton}
+    onPress={() => console.log('Pressed')}
   />
-
+  <IconButton
+    icon="cancel"
+    iconColor={MD3Colors.error50}
+    size={20}
+    style={styles.surfaceButton}
+    onPress={() => console.log('Pressed')}
+  />
+  </Surface>
+  <Surface style={styles.surface} elevation={4}>
+     <Text size={50}>Requesting to chaou</Text>
+     <IconButton
+    icon="check"
+    iconColor={'green'}
+    size={20}
+    style={styles.surfaceButton}
+    onPress={() => console.log('Pressed')}
+  />
+  <IconButton
+    icon="cancel"
+    iconColor={MD3Colors.error50}
+    size={20}
+    style={styles.surfaceButton}
+    onPress={() => console.log('Pressed')}
+  />
+  </Surface>
      </View>
       </SafeAreaProvider>
     </PaperProvider>
@@ -181,24 +185,21 @@ const styles = StyleSheet.create({
     
   },
   surface: {
+    flexDirection: 'row',
     padding: 8,
-    height: 80,
-    width: 150,
-    alignItems: 'center',
-    justifyContent: 'center',
+    
+    
+   
     marginBottom: 70,
   },
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-    backgroundColor:'white',
-    
-  },
+  surfaceButton: {
+    marginLeft: 10
+  }
+  
+  
   
   
 
 });
 
-export default SeatMap;
+export default Inbox;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { useTheme, Button, Appbar, TextInput, Card } from 'react-native-paper';
-import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, FAB} from 'react-native-paper';
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, FAB,  Modal, Portal, Dialog} from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -42,19 +42,29 @@ const auth = getAuth(app);
 
 
 const SeatRow = (props) => {
+    
+    
     const [email, setEmail] = React.useState(props.userEmail);
     const [a, setA] = React.useState(props.a)
     const [b, setB] = React.useState(props.b)
     const [c, setC] = React.useState(props.c)
     const [d, setD] = React.useState(props.d)
-    // React.useEffect(() => {
     
-    //     console.log(props.userEmail)
-
-    //     // Update the document title using the browser API
-    //    console.log("Effect Was Called");
+    React.useEffect(() => {
     
-    //   });
+        
+        
+        if(email === a.email) {
+            props.setCurrentSeat(4*(props.rowNumber -1) + 0)
+        } else if(email === b.email) {
+            props.setCurrentSeat(4*(props.rowNumber -1) + 1)
+        }else if(email === c.email) {
+            props.setCurrentSeat(4*(props.rowNumber -1) + 2)
+        }else if(email === d.email) {
+            props.setCurrentSeat(4*(props.rowNumber -1) + 3)
+        } 
+    
+      }, []);
   const theme = {
     ...DefaultTheme,
     colors: {
@@ -100,33 +110,48 @@ const SeatRow = (props) => {
 "backdrop": "rgba(41, 50, 52, 0.4)"
       }
     }
+    const calculateSeatIndex = (chosenSeatLetter) => {
+       var requestedSeat;
+        if(chosenSeatLetter === 'a') {
+            requestedSeat = 4*(props.rowNumber -1) + 0
+        } else if(chosenSeatLetter === 'b') {
+            requestedSeat = 4*(props.rowNumber -1) + 1
+        }else if(chosenSeatLetter === 'c') {
+            requestedSeat = 4*(props.rowNumber -1) + 2
+        }else if(chosenSeatLetter === 'd') {
+            requestedSeat = 4*(props.rowNumber -1) + 3
+        }
+        props.sendRequest(requestedSeat);
+    }
 
   return (
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
+     
       <View style={styles.rowContainer}>
+      
       <FAB 
     icon="alpha-a-box-outline"
    
     style= {email === a.email ? {backgroundColor: 'gray'} : a.taken === true ? {backgroundColor: '#eda955'} : {backgroundColor: 'green'} }
-    onPress={() => console.log(props.a)}
+    onPress={() => calculateSeatIndex('a')}
   />
   <FAB
     icon="alpha-b-box-outline"
     style= {email === b.email ? {backgroundColor: 'gray'} : b.taken === true ? {backgroundColor: '#eda955'} : {backgroundColor: 'green'} }
-     onPress={() => console.log(props.b)}
+    onPress={() => calculateSeatIndex('b')}
   />
   <Text style={{fontSize: 30, top:10}}>{props.rowNumber}</Text>
   <FAB
     icon="alpha-c-box-outline"
    
     style= {email === c.email ? {backgroundColor: 'gray'} : c.taken === true ? {backgroundColor: '#eda955'} : {backgroundColor: 'green'} }
-     onPress={() => console.log(props.c)}
+    onPress={() => calculateSeatIndex('c')}
   />
   <FAB
     icon="alpha-d-box-outline"
     style= {email === d.email ? {backgroundColor: 'gray'} : d.taken === true ? {backgroundColor: '#eda955'} : {backgroundColor: 'green'} }
-     onPress={() => console.log(props.d)}
+    onPress={() => calculateSeatIndex('d')}
   />
   </View>
  

@@ -119,6 +119,7 @@ const SSODelta = (props) => {
               const dbRef = ref(getDatabase(app));
               get(child(dbRef, `seats`))
                 .then((snapshot) => {
+                    
                     props.navigation.navigate('FlightSelect', {
                        seats: snapshot.val(),
                        email: userCredential.user.email
