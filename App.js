@@ -24,6 +24,11 @@ export default function App() {
    <NavigationContainer>
     
       <Stack.Navigator>
+      <Stack.Screen
+          name="Inbox"
+          component={Inbox}
+          options={{title: 'Request Messages'}}
+        />
       
       <Stack.Screen
           name="SSODelta"
@@ -40,11 +45,11 @@ export default function App() {
           component={SeatMap}
           options={{title: 'Request to Seat Swap'}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Inbox"
           component={Inbox}
           options={{title: 'Request Messages'}}
-        />
+        /> */}
 
         
        
