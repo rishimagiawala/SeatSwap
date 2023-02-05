@@ -103,9 +103,9 @@ const FlightSelect = (props) => {
        <ScrollView>
      
   <Card style={styles.flightCard}>
-    <Card.Title title="Atlanta to JFK" subtitle= {props.route.params.email}  />
+    <Card.Title title="Atlanta to New York" subtitle= 'DL 106 | Econ-Plus | D5'  />
    
-    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+    <Card.Cover source={{ uri: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2021/09/1200/675/statue-of-liberty-1.jpg?ve=1&tl=1' }} />
     <Card.Actions>
     <Button onPress={() => {
        props.navigation.navigate('SeatMap', {
@@ -115,6 +115,35 @@ const FlightSelect = (props) => {
       }}>Ok</Button>
     </Card.Actions>
   </Card>
+  <Card style={styles.flightCard}>
+  <Card.Title title="New York to London" subtitle= 'DL 432 | Econ | C3'  />
+   
+    <Card.Cover source={{ uri: 'https://www.history.com/.image/t_share/MTU3ODc3NjU2NzQ4NTAwMjk3/this-day-in-history-05311859---big-ben-in-london.jpg' }} />
+    <Card.Actions>
+    <Button onPress={() => {
+       props.navigation.navigate('SeatMap', {
+        seats: props.route.params.seats,
+        userEmail: props.route.params.email
+       })
+      }}>Ok</Button>
+    </Card.Actions>
+  </Card>
+
+  <Card style={styles.flightCard}>
+  <Card.Title title="London to Mumbai" subtitle= 'DL 232 | Econ | A3'  />
+   
+    <Card.Cover source={{ uri: 'http://cdn.cnn.com/cnnnext/dam/assets/170424132528-taj-mahal-hotel.jpg' }} />
+    <Card.Actions>
+    <Button onPress={() => {
+       props.navigation.navigate('SeatMap', {
+        seats: props.route.params.seats,
+        userEmail: props.route.params.email
+       })
+      }}>Ok</Button>
+    </Card.Actions>
+  </Card>
+  
+  
         
   </ScrollView>
       </SafeAreaProvider>

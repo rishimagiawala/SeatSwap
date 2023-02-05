@@ -4,21 +4,21 @@ import DropDown from "react-native-paper-dropdown";
 
 function AirlineDropDown(props){
     const [showDropDown, setShowDropDown] = React.useState(false);
-    const [gender, setGender] = React.useState("");
+    const [gender, setGender] = React.useState("Delta");
     // const [showMultiSelectDropDown, setShowMultiSelectDropDown] = useState(false);
     
     const genderList = [
       {
-        label: "Male",
-        value: "male",
+        label: "Delta",
+        value: "Delta",
       },
       {
-        label: "Female",
-        value: "female",
+        label: "Spirit",
+        value: "Spirit",
       },
       {
-        label: "Others",
-        value: "others",
+        label: "American Airlines",
+        value: "American Airlines",
       },
     ];
     const colorList = [
@@ -53,8 +53,12 @@ function AirlineDropDown(props){
     showDropDown={() => setShowDropDown(true)}
     onDismiss={() => setShowDropDown(false)}
     value={gender}
-    setValue={setGender}
+    setValue={(value)=>{
+      props.setAirline(value + " SSO")
+      setGender(value)
+    }}
     list={genderList}
+    
   />
   );
    }
