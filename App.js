@@ -12,6 +12,7 @@ import SSODelta from './pages/SSODelta';
 import Home from './pages/Home';
 import SeatMap from './pages/SeatMap';
 import FlightSelect from './pages/FlightSelect';
+import Inbox from './pages/Inbox';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
    <NavigationContainer>
     
       <Stack.Navigator>
+      
       <Stack.Screen
           name="SSODelta"
           component={SSODelta}
@@ -37,6 +39,11 @@ export default function App() {
           name="SeatMap"
           component={SeatMap}
           options={{title: 'Request to Seat Swap'}}
+        />
+        <Stack.Screen
+          name="Inbox"
+          component={Inbox}
+          options={{title: 'Request Messages'}}
         />
 
         
