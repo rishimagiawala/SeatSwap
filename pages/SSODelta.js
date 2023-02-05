@@ -11,7 +11,7 @@ import { initializeApp } from 'firebase/app';
 
 // Optionally import the services that you want to use
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// import {...} from "firebase/database";
+import { getDatabase, ref, onValue, set, get, child, update } from "firebase/database";
 // import {...} from "firebase/firestore";
 // import {...} from "firebase/functions";
 // import {...} from "firebase/storage";
@@ -35,7 +35,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 // const auth = getAuth(app);
 const auth = getAuth(app);
-
+const userDB = getDatabase(app);
 
 
 const SSODelta = (props) => {
@@ -116,10 +116,20 @@ const SSODelta = (props) => {
           signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
               console.log(userCredential.user.email);
-             
-              props.navigation.navigate('FlightSelect', {
-                email: userCredential.user.email
-              })
+              const dbRef = ref(getDatabase(app));
+              get(child(dbRef, `seats`))
+                .then((snapshot) => {
+                    props.navigation.navigate('FlightSelect', {
+                       seats: snapshot.val(),
+                       email: userCredential.user.email
+                      })
+                 console.log(snapshot.val())
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+          
+              
               // ...
             })
             .catch((error) => {
