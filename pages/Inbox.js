@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { useTheme, Button, Appbar, TextInput, Card, Surface } from 'react-native-paper';
-import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, FAB, Portal, Dialog, IconButton, MD3Colors} from 'react-native-paper';
+import { useTheme, Button, Appbar, TextInput, Card, Surface, Modal } from 'react-native-paper';
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, FAB, Portal, Dialog, IconButton, MD3Colors } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import {delta} from '../assets/deltaLogo.png'
+import { delta } from '../assets/deltaLogo.png'
 import SeatRow from '../components/SeatRow';
-import { Foundation } from '@expo/vector-icons'; 
+import { Foundation } from '@expo/vector-icons';
+import { List } from 'react-native-paper';
 // import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
@@ -42,112 +43,106 @@ const auth = getAuth(app);
 
 
 const Inbox = (props) => {
-    
+
 
 
   const theme = {
     ...DefaultTheme,
     colors: {
-        "primary": "rgb(0, 104, 116)",
-"onPrimary": "rgb(255, 255, 255)",
-"primaryContainer": "rgb(151, 240, 255)",
-"onPrimaryContainer": "rgb(0, 31, 36)",
-"secondary": "rgb(74, 98, 103)",
-"onSecondary": "rgb(255, 255, 255)",
-"secondaryContainer": "rgb(205, 231, 236)",
-"onSecondaryContainer": "rgb(5, 31, 35)",
-"tertiary": "rgb(82, 94, 125)",
-"onTertiary": "rgb(255, 255, 255)",
-"tertiaryContainer": "rgb(218, 226, 255)",
-"onTertiaryContainer": "rgb(14, 27, 55)",
-"error": "rgb(186, 26, 26)",
-"onError": "rgb(255, 255, 255)",
-"errorContainer": "rgb(255, 218, 214)",
-"onErrorContainer": "rgb(65, 0, 2)",
-"background": "rgb(250, 253, 253)",
-"onBackground": "rgb(25, 28, 29)",
-"surface": "rgb(250, 253, 253)",
-"onSurface": "rgb(25, 28, 29)",
-"surfaceVariant": "rgb(219, 228, 230)",
-"onSurfaceVariant": "rgb(63, 72, 74)",
-"outline": "rgb(111, 121, 122)",
-"outlineVariant": "rgb(191, 200, 202)",
-"shadow": "rgb(0, 0, 0)",
-"scrim": "rgb(0, 0, 0)",
-"inverseSurface": "rgb(46, 49, 50)",
-"inverseOnSurface": "rgb(239, 241, 241)",
-"inversePrimary": "rgb(79, 216, 235)",
-"elevation": {
-  "level0": "transparent",
-  "level1": "rgb(238, 246, 246)",
-  "level2": "rgb(230, 241, 242)",
-  "level3": "rgb(223, 237, 238)",
-  "level4": "rgb(220, 235, 237)",
-  "level5": "rgb(215, 232, 234)"
-},
-"surfaceDisabled": "rgba(25, 28, 29, 0.12)",
-"onSurfaceDisabled": "rgba(25, 28, 29, 0.38)",
-"backdrop": "rgba(41, 50, 52, 0.4)"
-      }
+      "primary": "rgb(0, 104, 116)",
+      "onPrimary": "rgb(255, 255, 255)",
+      "primaryContainer": "rgb(151, 240, 255)",
+      "onPrimaryContainer": "rgb(0, 31, 36)",
+      "secondary": "rgb(74, 98, 103)",
+      "onSecondary": "rgb(255, 255, 255)",
+      "secondaryContainer": "rgb(205, 231, 236)",
+      "onSecondaryContainer": "rgb(5, 31, 35)",
+      "tertiary": "rgb(82, 94, 125)",
+      "onTertiary": "rgb(255, 255, 255)",
+      "tertiaryContainer": "rgb(218, 226, 255)",
+      "onTertiaryContainer": "rgb(14, 27, 55)",
+      "error": "rgb(186, 26, 26)",
+      "onError": "rgb(255, 255, 255)",
+      "errorContainer": "rgb(255, 218, 214)",
+      "onErrorContainer": "rgb(65, 0, 2)",
+      "background": "rgb(250, 253, 253)",
+      "onBackground": "rgb(25, 28, 29)",
+      "surface": "rgb(250, 253, 253)",
+      "onSurface": "rgb(25, 28, 29)",
+      "surfaceVariant": "rgb(219, 228, 230)",
+      "onSurfaceVariant": "rgb(63, 72, 74)",
+      "outline": "rgb(111, 121, 122)",
+      "outlineVariant": "rgb(191, 200, 202)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(46, 49, 50)",
+      "inverseOnSurface": "rgb(239, 241, 241)",
+      "inversePrimary": "rgb(79, 216, 235)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(238, 246, 246)",
+        "level2": "rgb(230, 241, 242)",
+        "level3": "rgb(223, 237, 238)",
+        "level4": "rgb(220, 235, 237)",
+        "level5": "rgb(215, 232, 234)"
+      },
+      "surfaceDisabled": "rgba(25, 28, 29, 0.12)",
+      "onSurfaceDisabled": "rgba(25, 28, 29, 0.38)",
+      "backdrop": "rgba(41, 50, 52, 0.4)"
     }
+  }
 
   return (
+
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
-      
-    <View>
-    <Surface style={styles.surface} elevation={4}>
-     <Text size={50}>Requesting to chaou</Text>
-     <IconButton
-    icon="check"
-    iconColor={'green'}
-    size={20}
-    style={styles.surfaceButton}
-    onPress={() => console.log('Pressed')}
-  />
-  <IconButton
-    icon="cancel"
-    iconColor={MD3Colors.error50}
-    size={20}
-    style={styles.surfaceButton}
-    onPress={() => console.log('Pressed')}
-  />
-  </Surface>
-  <Surface style={styles.surface} elevation={4}>
-     <Text size={50}>Requesting to chaou</Text>
-     <IconButton
-    icon="check"
-    iconColor={'green'}
-    size={20}
-    style={styles.surfaceButton}
-    onPress={() => console.log('Pressed')}
-  />
-  <IconButton
-    icon="cancel"
-    iconColor={MD3Colors.error50}
-    size={20}
-    style={styles.surfaceButton}
-    onPress={() => console.log('Pressed')}
-  />
-  </Surface>
-  <Surface style={styles.surface} elevation={4}>
-     <Text size={50}>Requesting to chaou</Text>
-     <IconButton
-    icon="check"
-    iconColor={'green'}
-    size={20}
-    style={styles.surfaceButton}
-    onPress={() => console.log('Pressed')}
-  />
-  <IconButton
-    icon="cancel"
-    iconColor={MD3Colors.error50}
-    size={20}
-    style={styles.surfaceButton}
-    onPress={() => console.log('Pressed')}
-  />
-  </Surface>
-     </View>
+
+        <View>
+          <List.Section style={styles.surface}>
+            <List.Subheader>Inbox</List.Subheader>
+
+            {/* <List.Accordion title="Request One" description="I want to trade seats with you please!" left={() => <List.Icon icon="email" />} />
+            <List.Accordion title="Request Two" description="I have an aisle seat and I want to swap!" left={() => <List.Icon color={MD3Colors.tertiary70} icon="email" />} />
+            <List.Accordion title="Request Three" description="Some message here" left={() => <List.Icon color={MD3Colors.tertiary70} icon="email" />} />
+            <List.Accordion title="Request Four" description="Some message here" left={() => <List.Icon color={MD3Colors.tertiary70} icon="email" />} />
+            <List.Accordion title="Request Five" description="Some message here" left={() => <List.Icon color={MD3Colors.tertiary70} icon="email" />} />
+            <List.Accordion title="Request Six" description="Some message here" left={() => <List.Icon color={MD3Colors.tertiary70} icon="email" />} />
+ */}
+            <List.AccordionGroup style={styles.surface}>
+              <List.Accordion title="Message 1"  description = "Hey you want to swap seats?" id="1" left={() => <List.Icon color={"#003268"} icon="email" />}>
+                <List.Item title="Name: Janaki Pandya" />
+                <List.Item title="Seat Number: 1C" />
+                <List.Item title="Email: janaki.pandya@gmail.com" />
+                <List.Item title="Phone Number: 707-808-9009" />
+              </List.Accordion>
+
+              <List.Accordion title="Message 2" description = "I'm in 3B would you like to swap seats with me?" id="2"left={() => <List.Icon color={"#003268"} icon="email" />}>
+              <List.Item title="Name: John Krasinski" />
+                <List.Item title="Seat Number: 3B" />
+                <List.Item title="Email: john.krasinski@gmail.com" />
+                <List.Item title="Phone Number: 404-505-6006" />
+              </List.Accordion>
+
+              <List.Accordion title="Message 3" description = "I want an aisle seat, do you want to swap?" id="3"left={() => <List.Icon color={"#003268"} icon="email" />}>
+              <List.Item title="Name: Manav Patel" />
+                <List.Item title="Seat Number: 4D" />
+                <List.Item title="Email: manavinatl@gmail.com" />
+                <List.Item title="Phone Number: 403-123-4311" />
+              </List.Accordion>
+
+              <List.Accordion title="Message 4" description = "Hey I'm in seat b2 looking to swap seats!" id="4"left={() => <List.Icon color={"#003268"} icon="email" />}>
+              <List.Item title="Name: Suchir Sastry" />
+                <List.Item title="Seat Number: 2C" />
+                <List.Item title="Email: suchirrs@gmail.com " />
+                <List.Item title="Phone Number: 102-203-3004 " />
+              </List.Accordion>
+
+
+            </List.AccordionGroup>
+
+
+          </List.Section>
+        </View>
       </SafeAreaProvider>
     </PaperProvider>
   );
@@ -157,14 +152,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    
-    
+
   },
   inputField: {
     marginBottom: 10,
     marginHorizontal: 10,
 
-    
   },
   loginButton: {
     marginTop: 10,
@@ -182,23 +175,23 @@ const styles = StyleSheet.create({
     marginHorizontal: 3
   },
   cabinColumn: {
-    
+
   },
   surface: {
-    flexDirection: 'row',
-    padding: 8,
-    
-    
-   
-    marginBottom: 70,
+    flexDirection: 'column',
+    padding: 20,
+
+
+
+    marginBottom: 5,
   },
   surfaceButton: {
     marginLeft: 10
   }
-  
-  
-  
-  
+
+
+
+
 
 });
 
