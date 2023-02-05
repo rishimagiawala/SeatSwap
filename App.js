@@ -13,6 +13,8 @@ import Home from './pages/Home';
 import SeatMap from './pages/SeatMap';
 import FlightSelect from './pages/FlightSelect';
 import Inbox from './pages/Inbox';
+import Loading from './pages/Loading';
+
 const Stack = createNativeStackNavigator()
 
 export default function App() {
@@ -41,11 +43,14 @@ export default function App() {
           component={SeatMap}
           options={{title: 'Request to Seat Swap'}}
         />
+        
         <Stack.Screen
           name="Inbox"
           component={Inbox}
           options={{title: 'Request Messages'}}
         />
+       
+
 
         
        

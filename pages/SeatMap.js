@@ -14,6 +14,7 @@ import { initializeApp } from 'firebase/app';
 
 // Optionally import the services that you want to use
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, onValue, set, get, child, update } from "firebase/database";
 // import {...} from "firebase/database";
 // import {...} from "firebase/firestore";
 // import {...} from "firebase/functions";
@@ -38,7 +39,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 // const auth = getAuth(app);
 const auth = getAuth(app);
-
+const userDB = getDatabase(app);
 
 
 const SeatMap = (props) => {
@@ -47,15 +48,26 @@ const SeatMap = (props) => {
     const showDialog = () => setVisible(true);
     const [chosenSeat, setChosenSeat] = React.useState();
     const [currentSeat, setCurrentSeat] = React.useState();
+    const [seats, setSeats] = React.useState(props.route.params.seats);
     const hideDialog = () => setVisible(false);
     const sendRequest = (requestedSeat) => {
         setChosenSeat(requestedSeat);
         
         showDialog();
     }
+    // React.useEffect(()=>{
+    //     const db = getDatabase(app);
+    //     get(child(db, `seats`))
+    //             .then((snapshot) => {
+                    
+                   
+    //              console.log(snapshot.val())
+    //             })
+    //             .catch((error) => {
+    //               console.error(error);
+    //             });
+    // }, [])
     
-     
-
 
   const theme = {
     ...DefaultTheme,
@@ -115,7 +127,18 @@ const SeatMap = (props) => {
               <Text variant="bodyMedium">Current Seat Is: {currentSeat}</Text>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={hideDialog}>Yes</Button>
+              <Button onPress={()=>{
+                 const db = getDatabase(app);
+                 set(ref(db, 'seats/' + chosenSeat), props.route.params.seats[currentSeat])
+                set(ref(db, 'seats/' + currentSeat), props.route.params.seats[chosenSeat])
+               hideDialog();
+                
+              
+              
+                 
+              }
+                
+                }>Yes</Button>
               <Button onPress={hideDialog}>No</Button>
             </Dialog.Actions>
           </Dialog>
